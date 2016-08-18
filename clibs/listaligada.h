@@ -7,6 +7,8 @@
  * Implementação da estrutura: Lista
  *
  * ===================================
+ *
+ * versão 0.9
  */
 
 /* Área de inclusão de bibliotecas */
@@ -117,6 +119,23 @@ int *fst(lista *plista) {
 }
 
 /**
+ * Retorna o restante da lista de origem, sem o primeiro
+ * elemento
+ */
+lista *rabo(lista *plista) {
+	if (plista->tamanho > 0) {
+		list *pnova_lista = nova_lista();
+		pnova_lista->pno = plista->pno->proximo;
+		pnova_lista->tamanho = plista->tamanho - 1;
+		return pnova_lista;
+	}
+	else {
+		return plista;
+	}
+}
+	
+
+/**
  * Remove o primeiro elemento de uma dada lista e retorna
  * um ponteiro para o seu valor numérico
  */
@@ -132,6 +151,28 @@ int *drop(lista *plista) {
 		free(primeiro_no);
 		plista->tamanho--;
 		return pprimeiro;
+	}
+}
+
+/**
+ * Divide uma lista (plista) em duas (pla e plb) de acordo
+ * com o resultado da função p.
+ * p = 1 -> insere em pla
+ * p = 0 -> insere em plb
+ */
+void dividir(lista *plista, lista *pla, lista *plb, int (*p)(int)) {
+	if (plista->tamanho > 0) {
+		no *ptemp_no = plista->pno;
+
+		while (ptemp_no) {
+			if (p(ptemp_no->elemento) == 1) {
+				insere(pla, ptemp_no->elemento);
+			}
+			else {
+				insere(plb, ptemp_no->elemento);
+			}
+			ptemp_no = ptemp_no->proximo;
+		}
 	}
 }
 
