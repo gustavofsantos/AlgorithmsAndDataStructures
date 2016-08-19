@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "pilha.h"
 
 int main(int argc, char **argv) {
@@ -24,8 +26,21 @@ int main(int argc, char **argv) {
 
 	imprimir(ppilha1);
 
+	pilha *ppilha2 = nova_pilha();
+	pilha *ppilha3 = nova_pilha();
+
+	push(ppilha2, 9);
+	push(ppilha2, 0);
+	push(ppilha2, 2);
+
+	push(ppilha3, 0);
+	push(ppilha3, 2);
+	push(ppilha3, 1);
+
 	free(topo);
 	limpar(ppilha1);
+	limpar(ppilha2);
+	limpar(ppilha3);
 
 	return 0;
 }
